@@ -43,9 +43,10 @@ Route::group([
     Route::get('/get-specialities', [userController::class, 'getSpecialities']); 
     Route::post('/add-project', [userController::class, 'addProject']); 
     Route::post('/add-project-photo', [userController::class, 'addProjectPhoto']);  
-    Route::post('/rate-project', [userController::class, 'rateProject']);    
-    Route::post('/comment-project', [userController::class, 'commentProject']); 
+    Route::post('/rate-specialist', [userController::class, 'rateSpecialist']);    
+    Route::post('/comment-specialist', [userController::class, 'commentSpecialist']); 
     Route::post('/add-location', [userController::class, 'addLocation']);   
-    Route::get('/average-rate', [userController::class, 'averageRate']);   
+    Route::get('/add-average-rate', [userController::class, 'addAverageRate']);  
+    Route::get('/get-comments', [userController::class, 'getComments']); 
 
 });

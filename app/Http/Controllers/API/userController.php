@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\api;
 
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\SpecialistLocation;
+use App\Models\RateSpecialist;
+use App\Models\CommentSpecialist;
 use App\Models\SpecialistProfile;
 use App\Models\Speciality;
 use App\Models\Project;
@@ -24,15 +27,14 @@ add user_id to location table*/
 class userController extends Controller
 {
     public function addProfile(Request $request){
-        $user_id = auth()->user();
+        $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $type = $user->is_specialist;
-        return response()->json($type, 200);
         if ($type){
             $profile = new SpecialistProfile;
             $profile->phone = $request->phone;
             $profile->nationality =$request->nationality;
-            $profile->profile_picture_url = NULL ;
+            $profile->profile_picture_url = "null" ;
             $profile->price = $request->price;
             $profile->currency = $request->currency;
             $profile->avg_rating = $request->avg_rating;
@@ -52,14 +54,14 @@ class userController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $specialityName = $request->speciality;
-        $speciality= Speciality::where('name',$specialityName);
+        $speciality = DB::table('specialities')->where('name','=',$specialityName)->first();
         $speciality_id = $speciality->id;
         $newSpeciality = new SpecialityOfSpecialist;
         $newSpeciality->specialist_id = $user_id;
         $newSpeciality->speciality_id = $speciality_id;
         $newSpeciality->save();
         $response['status'] = "speciality added";
-        return response()->json($specialityName, 200);
+        return response()->json($response, 200);
     }
 
     public function getUser(Request $request){
@@ -75,7 +77,7 @@ class userController extends Controller
     public function getSpecialities(Request $request){
         $speciality = Speciality:: all();
         if($speciality){
-            return response()->json($user, 200);
+            return response()->json($speciality, 200);
         }else{
             $response['status'] = "No results found";
             return response()->json($response, 200);
@@ -86,9 +88,9 @@ class userController extends Controller
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $name = '%'.$request->name."%";
-        $users = User::Search($name)
-                       ->isSpecialist()
-                       ->get();
+        $users = User::search($name)
+                        ->isSpecialist()
+                        ->get();
         if(count($users) > 0){
             return response()->json($users, 200);
         }else{
@@ -96,6 +98,7 @@ class userController extends Controller
             return response()->json($response, 200);
         }
     }
+
 
     public function addProject(Request $request){
         $user_id = auth()->user()->id;
@@ -108,9 +111,7 @@ class userController extends Controller
             $project->is_done = 0 ;
             $project->total_cost= $request->total_cost;
             $project->currency = $request->currency;
-            $project->specialist_is = $user_id;
-            $project->user_id = $user_id;
-            $project->location_id = 1; 
+            $project->specialist_id = $user_id;
             $project->save();
             $response['status'] = "project-added";
             return response()->json($response, 200);
@@ -137,24 +138,30 @@ class userController extends Controller
         return response()->json($response, 200);
     }
 
-    public function rateProject(Request $request){
+    public function rateSpecialist(Request $request){
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $rate = $request->rate;
-        $project = Project::find($request->project_id);
-        $project->rating = $rate;
-        $project->save();
+        $specialist_id = $request->specialist_id;
+        $object = new RateSpecialist;
+        $object->rate = $rate;
+        $object->specialist_id = $specialist_id;
+        $object->client_id = $user_id;
+        $object->save();
         $response['status']="rating_added";
         return response()->json($response,200);
     }
 
-    public function commentProject(Request $request){
+    public function commentSpecialist(Request $request){
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
         $comment = $request->comment;
-        $project = Project::find($request->project_id);
-        $project->comment = $comment;
-        $project->save();
+        $specialist_id = $request->specialist_id;
+        $object = new CommentSpecialist;
+        $object->comment = $comment;
+        $object->specialist_id = $specialist_id;
+        $object->client_id = $user_id;
+        $object->save();
         $response['status']="comment_added";
         return response()->json($response,200);
     }
@@ -173,13 +180,28 @@ class userController extends Controller
         return response()->json($response,200);
     }
 
-    public function averageRating(Request $request){
+    public function addAverageRating(Request $request){
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $rating = Project::avg($rate)->where('specialist_id',$user_id);  
+        $specialist_id = $request->specialist_id;
+        $rating = RateSpecialist::select('rate')->where('specialist_id','=',$specialist_id);  
         $rating->save();
         $response['status']="averageRate";
         return response()->json($response,200);
     }
+
+    public function getComments(Request $request){
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $specialist_id = $request->specialist_id;
+        $comments = CommentSpecialist::select('comment')->where('specialist_id','=',$specialist_id);  
+        $comments->save();
+        if(count($comments) > 0){
+            return response()->json($comments, 200);
+        }else{
+            $response['status'] = "No comments found";
+            return response()->json($response, 200);
+        }
+
 
 }

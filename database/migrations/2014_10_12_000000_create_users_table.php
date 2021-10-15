@@ -48,6 +48,25 @@ class CreateUsersTable extends Migration
         $table->timestamps();
     });
 
+    Schema::create('rateSpecialists', function (Blueprint $table) {
+        $table->id();
+        $table->tinyInteger('rate');
+        $table->integer('specialist_id');    
+        $table->integer('client_id');    
+        $table->rememberToken();
+        $table->timestamps();
+    });
+
+    Schema::create('commentSpecialists', function (Blueprint $table) {
+        $table->id();
+        $table->mediumText('comment');
+        $table->integer('specialist_id');    
+        $table->integer('client_id');    
+        $table->rememberToken();
+        $table->timestamps();
+    });
+
+
     Schema::create('specialities', function (Blueprint $table) {
         $table->id();
         $table->string('name');
@@ -70,8 +89,6 @@ class CreateUsersTable extends Migration
         $table->id();
         $table->string('name');
         $table->longText('description');
-        $table->integer('rating');
-        $table->string('comment');
         $table->boolean('is_done');
         $table->integer('total_cost');
         $table->string('currency');
