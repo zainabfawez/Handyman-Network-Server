@@ -74,10 +74,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     
-    public function scopeSearch($query, $name){
-        return $query->where('first_name','LIKE' ,"$name")
-                    ->orWhere('last_name','LIKE' , "$name");
-    }
+  
 
     public function scopeIsSpecialist($query){
         return $query->where('is_specialist','=',1);

@@ -12,4 +12,8 @@ class speciality extends Model
     public function users(){
         return $this->belongsToMany(User::class, 'specialityOfSpecialist');
     }
+
+    public function scopeSearch($query, $speciality){
+        return $query->where('name','LIKE' ,"$speciality");
+    }
 }

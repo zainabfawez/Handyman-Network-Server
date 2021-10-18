@@ -13,6 +13,7 @@ use App\Models\CommentSpecialist;
 use App\Models\SpecialistProfile;
 use App\Models\Speciality;
 use App\Models\Project;
+use App\Models\SpecialistTip;
 use App\Models\ProjectPhoto;
 use App\Models\SpecialityOfSpecialist;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +38,6 @@ class userController extends Controller
             $profile->profile_picture_url = "null" ;
             $profile->price = $request->price;
             $profile->currency = $request->currency;
-            $profile->avg_rating = $request->avg_rating;
             $profile->user_id = $user_id;
             $profile->save();
             $response['status'] = "profile-added";
@@ -74,8 +74,27 @@ class userController extends Controller
         }
     }
 
-    public function getSpecialities(Request $request){
-        $speciality = Speciality:: all();
+    // returning empty array, should return name of the specilaity('electrician)
+    public function getSpecialistSpeciality(Request $request){
+        $user_id = auth()->user()->id;
+        //return response()->json($user_id, 200);
+        $specialist_id = $request->specialist_id;
+        $speciality_id = SpecialityOfSpecialist::select('speciality_id')
+                                                ->where('specialist_id','=', $specialist_id)
+                                                ->get();
+        //return response()->json($speciality_id, 200);                                   
+        $speciality_name = Speciality::select('name')->where('id','=', $speciality_id)->first();   
+        if($speciality_name){
+            return response()->json($speciality_name, 200);
+        }else{
+            $response['status'] = "No results found";
+            return response()->json($response, 200);
+       }
+    }
+
+    public function getAllSpecialities(Request $request){
+        $user_id = auth()->user()->id;
+        $speciality = Speciality::all();
         if($speciality){
             return response()->json($speciality, 200);
         }else{
@@ -84,15 +103,22 @@ class userController extends Controller
         }
     }
 
-    public function searchUser(Request $request){
+    public function searchBySpeciality(Request $request){
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $name = '%'.$request->name."%";
-        $users = User::search($name)
-                        ->isSpecialist()
-                        ->get();
-        if(count($users) > 0){
-            return response()->json($users, 200);
+        $name = $request->speciality."%";
+        $speciality_id = Speciality::where('name', 'LIKE', $name)->first()->id;
+        $specialists_id = SpecialityOfSpecialist::select('specialist_id')
+                                                    ->where('speciality_id','=',$speciality_id)
+                                                    ->get();
+        $specialists = array();
+        foreach($specialists_id as $specialist_id){
+            $id = (int) $specialist_id->specialist_id;
+            $sp= User::where('id','=',$id)->get();
+            $specialists[] = $sp;
+        }             
+        if(count($specialists) > 0){
+            return response()->json($specialists, 200);
         }else{
             $response['status'] = "No results found";
             return response()->json($response, 200);
@@ -120,7 +146,8 @@ class userController extends Controller
             return response()->json($response, 403);
         }
     }
-
+    
+    //not done
     public function addProjectPhoto(Request $request){
         $image = $request->image;  // your base64 encoded
         $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
@@ -165,7 +192,8 @@ class userController extends Controller
         $response['status']="comment_added";
         return response()->json($response,200);
     }
-
+    
+    //not done
     public function addLocation(Request $request){
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
@@ -179,15 +207,20 @@ class userController extends Controller
         $response['status']="location_added";
         return response()->json($response,200);
     }
-
-    public function addAverageRating(Request $request){
+    
+    
+    public function getAverageRate(Request $request){
         $user_id = auth()->user()->id;
-        $user = User::find($user_id);
         $specialist_id = $request->specialist_id;
-        $rating = RateSpecialist::select('rate')->where('specialist_id','=',$specialist_id);  
-        $rating->save();
-        $response['status']="averageRate";
-        return response()->json($response,200);
+        $rating = RateSpecialist::where('specialist_id','=',$specialist_id)->avg('rate');  
+        if ($rating){
+            return response()->json($rating,200);
+        }else{
+            $response['status']="no rates yet";
+            return response()->json($response,200);
+        }
+        
+      
     }
 
     public function getComments(Request $request){
@@ -202,6 +235,28 @@ class userController extends Controller
             $response['status'] = "No comments found";
             return response()->json($response, 200);
         }
+    }
+
+    public function getTips(Request $request){
+        $user_id = auth()->user()->id;
+        $tips = SpecialistTip::all();  
+        if(count($tips) > 0){
+            return response()->json($tips, 200);
+        }else{
+            $response['status'] = "No tips found";
+            return response()->json($response, 200);
+        }
+    }
+
+    public function addTip(Request $request){
+        $user_id = auth()->user()->id;
+        $newTip = new SpecialistTip;
+        $newTip->specialist_id = $user_id;
+        $newTip->tip = $request->tip;
+        $newTip->save();
+        $response['status']="tip_added";
+        return response()->json($response,200);
+
     }
 
 }

@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration
         $table->string('profile_picture_url');
         $table->integer('price');
         $table->string('currency');
-        $table->float('avg_rating');
+        $table->integer('experience');
         $table->integer('user_id');
         $table->rememberToken();
         $table->timestamps();
@@ -104,6 +104,16 @@ class CreateUsersTable extends Migration
         $table->rememberToken();
         $table->timestamps();
     });
+
+    Schema::create('specialists_tips', function (Blueprint $table) {
+        $table->id();
+        $table->longText('tip');
+        $table->integer('specialist_id');
+        //$table->string('image_url');
+        $table->rememberToken();
+        $table->timestamps();
+    });
+
     }
 
     /**
