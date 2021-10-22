@@ -48,6 +48,19 @@ class userController extends Controller
         }
     }
 
+    public function getProfile(Request $request){
+        $user_id = auth()->user()->id;
+        $specialist_id = $request->specialist_id;
+        $profile = SpecialistProfile::where('user_id','=', $specialist_id)->get();
+        if($profile){
+            return response()->json($profile, 200);
+        }else{
+            $response['status'] = "No results found";
+            return response()->json($response, 200);
+        }
+
+    }
+
    
 
     public function addSpeciality(Request $request){
@@ -83,7 +96,7 @@ class userController extends Controller
                                                 ->where('specialist_id','=', $specialist_id)
                                                 ->get();
         //return response()->json($speciality_id, 200);                                   
-        $speciality_name = Speciality::select('name')->where('id','=', $speciality_id)->first();   
+        $speciality_name = DB::table('specialities')->where('id','=',$speciality_id)->get(); 
         if($speciality_name){
             return response()->json($speciality_name, 200);
         }else{

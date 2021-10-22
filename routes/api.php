@@ -37,6 +37,7 @@ Route::group([
 
 ], function () {
     Route::post('/add-profile', [userController::class, 'addProfile']); 
+    Route::get('/get-profile', [userController::class, 'getProfile']); 
     Route::post('/add-speciality', [userController::class, 'addSpeciality']); 
     Route::get('/get-user', [userController::class, 'getUser']);
     Route::post('/search-speciality', [userController::class, 'searchBySpeciality']);   
