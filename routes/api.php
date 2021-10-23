@@ -52,4 +52,7 @@ Route::group([
     Route::get('/get-comments', [userController::class, 'getComments']); 
     Route::post('/add-tip', [userController::class, 'addTip']); 
     Route::get('/get-tips', [userController::class, 'getTips']); 
+    Route::get('/get-all-clients', [userController::class, 'getAllClients']);
+    Route::get('/get-push-tokens', [userController::class, 'getPushToken']); 
+
 });

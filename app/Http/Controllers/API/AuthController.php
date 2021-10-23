@@ -30,6 +30,8 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+
+     //add expo push notification token request from front end (query to update the token)
     public function login(Request $request){
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
@@ -69,6 +71,9 @@ class AuthController extends Controller
             $user->last_name =$request->last_name;
             $user->email =$request->email;
             $user->password = bcrypt($request->password);
+            $user->longitude = $request->longitude;
+            $user->latitude = $request->latitude;
+            $user->expoPushNotificationUser;
             $user->is_specialist = $request-> is_specialist; 
             $user->save();
 
@@ -86,7 +91,7 @@ class AuthController extends Controller
      */
     public function logout() {
         auth()->logout();
-
+        //query to update the expo push notification token to null
         return response()->json(['message' => 'User successfully signed out']);
     }
 

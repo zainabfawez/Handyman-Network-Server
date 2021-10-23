@@ -20,10 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 
 use Validator;
-/* change in data base:
-add rating,comment to project table
-remove location_id from addPrfile
-add user_id to location table*/
+
 
 class userController extends Controller
 {
@@ -60,8 +57,6 @@ class userController extends Controller
         }
 
     }
-
-   
 
     public function addSpeciality(Request $request){
         $user_id = auth()->user()->id;
@@ -160,19 +155,19 @@ class userController extends Controller
         }
     }
     
-    //not done
+ 
     public function addProjectPhoto(Request $request){
         $image = $request->image;  // your base64 encoded
         $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
         $path=public_path();
-        \File::put($path. '/image/' . $imageName, base64_decode($image));
+        \File::put($path. '/ProjectImages/' . $imageName, base64_decode($image));
         $response['status'] = "add_photo";
         $user_id = auth()->user()->id;    
         $user = User::find($user_id);
         $project = Project::where('specialist_id', $user_id);
         $project_id = $project->id;
         $photo = new ProjectPhoto;
-        $photo->photo_url= '/image/'.$imageName;
+        $photo->photo_url= '/ProjectImages/'.$imageName;
         $photo->project_id = $project_id;
         $user->save();
         return response()->json($response, 200);
@@ -206,22 +201,6 @@ class userController extends Controller
         return response()->json($response,200);
     }
     
-    //not done
-    public function addLocation(Request $request){
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $location = new Project;
-        $location->country = $request->country;
-        $location->city = $request ->city;
-        $location->longitude = $request ->longitude;
-        $location->latitude = $request ->latitude;
-        $location->user_id = user_id;
-        $location->save();
-        $response['status']="location_added";
-        return response()->json($response,200);
-    }
-    
-    
     public function getAverageRate(Request $request){
         $user_id = auth()->user()->id;
         $specialist_id = $request->specialist_id;
@@ -231,9 +210,7 @@ class userController extends Controller
         }else{
             $response['status']="no rates yet";
             return response()->json($response,200);
-        }
-        
-      
+        }      
     }
 
     public function getComments(Request $request){
@@ -272,4 +249,23 @@ class userController extends Controller
 
     }
 
+    public function getAllClients(){
+        $clients = User::where('is_specialist','=',0)->get();
+        if($clients){
+            return response()->json($clients, 200);
+        }else{
+            $response['status'] = "No results found";
+            return response()->json($response, 200);
+        }
+    }
+
+    public function getpushToken(){
+        $pushTokens = User::select('expoPushNotificationToken')->where('is_specialist','=',0)->get();
+        if($pushTokens){
+            return response()->json($pushTokens, 200);
+        }else{
+            $response['status'] = "No results found";
+            return response()->json($response, 200);
+        }
+    }
 }

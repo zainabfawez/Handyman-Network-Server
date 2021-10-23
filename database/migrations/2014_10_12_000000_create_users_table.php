@@ -17,9 +17,12 @@ class CreateUsersTable extends Migration
         $table->string('first_name');
         $table->string('last_name');
         $table->string('email')->unique();
+        $table->double('longitude', 15, 8);
+        $table->double('latitude', 15, 8);
         $table->timestamp('email_verified_at')->nullable();
         $table->string('password');
         $table->boolean('is_specialist'); /* 0 for client, 1 for specialist */
+        $table->string ('expoPushNotificationToken')->nullable();
         $table->rememberToken();
         $table->timestamps();
     });
@@ -37,16 +40,7 @@ class CreateUsersTable extends Migration
         $table->timestamps();
     });
 
-    Schema::create('locations', function (Blueprint $table) {
-        $table->id();
-        $table->string('country');
-        $table->string('city');       
-        $table->float('longitude');
-        $table->float('latitude');
-        $table->integer('user_id');
-        $table->rememberToken();
-        $table->timestamps();
-    });
+    
 
     Schema::create('rateSpecialists', function (Blueprint $table) {
         $table->id();
