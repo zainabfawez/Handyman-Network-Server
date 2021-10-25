@@ -36,6 +36,7 @@ class CreateUsersTable extends Migration
         $table->string('currency');
         $table->integer('experience');
         $table->integer('user_id');
+        $table->string('profile_path');
         $table->rememberToken();
         $table->timestamps();
     });

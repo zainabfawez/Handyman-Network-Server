@@ -36,6 +36,7 @@ class userController extends Controller
             $profile->price = $request->price;
             $profile->currency = $request->currency;
             $profile->user_id = $user_id;
+            $profile->profile_path = "null";
             $profile->save();
             $response['status'] = "profile-added";
             return response()->json($response, 200);
@@ -56,6 +57,20 @@ class userController extends Controller
             return response()->json($response, 200);
         }
 
+    }
+
+    //need to be checked
+    public function addProfilePic(Request $request){
+        $image = $request->image;  // your base64 encoded
+        $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
+        $path=public_path();
+        \File::put($path. '/image/' . $imageName, base64_decode($image));
+        $response['status'] = "add-Profile";
+        $user_id = auth()->user()->id;
+        $profile = SpecialistProfile::where('user_id', '=', $user_id);
+        $profile->profile_path = '/image/'.$imageName;
+        $profile->save();
+        return response()->json($user, 200);
     }
 
     public function addSpeciality(Request $request){
@@ -82,16 +97,13 @@ class userController extends Controller
         }
     }
 
-    // returning empty array, should return name of the specilaity('electrician)
     public function getSpecialistSpeciality(Request $request){
         $user_id = auth()->user()->id;
-        //return response()->json($user_id, 200);
         $specialist_id = $request->specialist_id;
         $speciality_id = SpecialityOfSpecialist::select('speciality_id')
                                                 ->where('specialist_id','=', $specialist_id)
-                                                ->get();
-        //return response()->json($speciality_id, 200);                                   
-        $speciality_name = DB::table('specialities')->where('id','=',$speciality_id)->get(); 
+                                                ->first();                               
+        $speciality_name =Speciality::find($speciality_id, 'name');
         if($speciality_name){
             return response()->json($speciality_name, 200);
         }else{
@@ -155,7 +167,7 @@ class userController extends Controller
         }
     }
     
- 
+   // need to be checked
     public function addProjectPhoto(Request $request){
         $image = $request->image;  // your base64 encoded
         $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
@@ -253,6 +265,16 @@ class userController extends Controller
         $clients = User::where('is_specialist','=',0)->get();
         if($clients){
             return response()->json($clients, 200);
+        }else{
+            $response['status'] = "No results found";
+            return response()->json($response, 200);
+        }
+    }
+
+    public function getAllSpecialists(){
+        $specialists = User::where('is_specialist','=',1)->get();
+        if($specialists){
+            return response()->json($specialists, 200);
         }else{
             $response['status'] = "No results found";
             return response()->json($response, 200);

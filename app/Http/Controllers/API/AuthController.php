@@ -45,7 +45,7 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
+       
         return $this->createNewToken($token);
     }
 
@@ -64,6 +64,7 @@ class AuthController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
+       
 
         $user = new User;
            
@@ -73,14 +74,13 @@ class AuthController extends Controller
             $user->password = bcrypt($request->password);
             $user->longitude = $request->longitude;
             $user->latitude = $request->latitude;
-            $user->expoPushNotificationUser;
+            $user->expoPushNotificationToken = $request->expoPushNotificationToken;
             $user->is_specialist = $request-> is_specialist; 
             $user->save();
-
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+            if (! $token = auth()->attempt($validator->validated())) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+            return $this->createNewToken($token);
     }
 
 

@@ -52,6 +52,55 @@ class DatabaseSeeder extends Seeder
         "is_specialist" => 0,
         ]);
 
+        DB::table("users")->insert([
+
+          "first_name" => "Zeinab",
+          "last_name" => "Zaitoun",
+          "email" => "z@mail.com",
+          "longitude"=> 33.878427,
+          "latitude"=>  35.548832,
+          "expoPushNotificationToken"=> null,
+          "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
+          "is_specialist" => 1,
+          ]);
+
+          DB::table("users")->insert([
+
+            "first_name" => "Zeinab",
+            "last_name" => "Zaitoun",
+            "email" => "zz@gmail.com",
+            "longitude"=> 33.828427,
+            "latitude"=>  35.568832,
+            "expoPushNotificationToken"=> null,
+            "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
+            "is_specialist" => 1,
+            ]);
+
+
+            DB::table("users")->insert([
+
+              "first_name" => "Zeinab",
+              "last_name" => "Zaitoun",
+              "email" => "zz@handymail.com",
+              "longitude"=> 33.888427,
+              "latitude"=>  35.558832,
+              "expoPushNotificationToken"=> null,
+              "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
+              "is_specialist" => 1,
+              ]);
+
+              DB::table("users")->insert([
+
+                "first_name" => "Yasser",
+                "last_name" => "Sweid",
+                "email" => "ys@mail.com",
+                "longitude"=> 33.898427,
+                "latitude"=>  35.598832,
+                "expoPushNotificationToken"=> null,
+                "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
+                "is_specialist" => 1,
+                ]);
+
 
       DB::table("specialities")->insert([
         
@@ -67,6 +116,19 @@ class DatabaseSeeder extends Seeder
 
       ]);
 
+      DB::table("specialities")->insert([
+        
+        "name" => "carpenter",
+        "description" => "do every thing related to wood",
+
+      ]);
+
+      DB::table("specialities")->insert([
+        
+        "name" => "painter",
+        "description" => "do every thing related to painting walls",
+
+      ]);
       
       DB::table("specialityOfSpecialist")->insert([
         
@@ -74,6 +136,37 @@ class DatabaseSeeder extends Seeder
         "speciality_id" => 1,
         
       ]);
+
+      DB::table("specialityOfSpecialist")->insert([
+        
+        "specialist_id" => 4,
+        "speciality_id" => 2,
+        
+      ]);
+
+      DB::table("specialityOfSpecialist")->insert([
+        
+        "specialist_id" => 5,
+        "speciality_id" => 3,
+        
+      ]);
+
+      DB::table("specialityOfSpecialist")->insert([
+        
+        "specialist_id" => 6,
+        "speciality_id" => 4,
+        
+      ]);
+
+      DB::table("specialityOfSpecialist")->insert([
+        
+        "specialist_id" => 7,
+        "speciality_id" => 1,
+        
+      ]);
+
+    
+
 
 
 }

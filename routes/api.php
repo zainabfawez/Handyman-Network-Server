@@ -54,5 +54,8 @@ Route::group([
     Route::get('/get-tips', [userController::class, 'getTips']); 
     Route::get('/get-all-clients', [userController::class, 'getAllClients']);
     Route::get('/get-push-tokens', [userController::class, 'getPushToken']); 
+    Route::post('/add-profile-pic', [userController::class, 'addProfilePic']); 
+    Route::get('/get-all-specialists', [userController::class, 'getAllSpecialists']);
+
 
 });
