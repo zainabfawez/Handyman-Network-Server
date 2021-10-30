@@ -165,6 +165,65 @@ class DatabaseSeeder extends Seeder
         
       ]);
 
+      DB::table("specialists_profile")->insert([
+        
+        'phone' => "+96171515448",
+        'nationality'=>"lebanese" ,      
+        'profile_picture_url'=>"nothing",
+        'price'=>10,
+        'currency'=>"USD",
+        'experience'=>8,
+        'user_id'=>1,
+        'profile_path'=>"nothing",
+        
+      ]);
+
+      
+      DB::table("projects")->insert([
+        
+        "name" => 'Project 1',
+        "specialist_id" => 1,
+        'description' => 'fixed all the wires, installed the lamps...',
+        'total_cost' => '800',
+        'currency'=> 'USD',
+        'is_done' => 1,
+        
+      ]);
+
+       
+      DB::table("commentspecialists")->insert([
+        
+        "specialist_id" => 1,
+        "client_id" => 2,
+        'comment' => 'Amazing work, really experienced',   
+      ]);
+
+      DB::table("commentspecialists")->insert([
+        
+        "specialist_id" => 1,
+        "client_id" => 3,
+        'comment' => 'Always on time, deserves every penny',   
+      ]);
+
+      DB::table("ratespecialists")->insert([
+        
+        "specialist_id" => 1,
+        "client_id" => 3,
+        'rate' => 4,   
+      ]);
+
+      DB::table("ratespecialists")->insert([
+        
+        "specialist_id" => 1,
+        "client_id" => 2,
+        'rate' => 5,   
+      ]);
+
+
+
+
+
+
     
 
 
