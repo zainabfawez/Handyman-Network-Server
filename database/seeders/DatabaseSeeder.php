@@ -54,8 +54,8 @@ class DatabaseSeeder extends Seeder
 
       DB::table("users")->insert([
 
-        "first_name" => "Zeinab",
-        "last_name" => "Zaitoun",
+        "first_name" => "Ali",
+        "last_name" => "Zaytoun",
         "email" => "z@mail.com",
         "longitude"=> 33.878427,
         "latitude"=>  35.548832,
@@ -66,8 +66,8 @@ class DatabaseSeeder extends Seeder
 
         DB::table("users")->insert([
 
-          "first_name" => "Zeinab",
-          "last_name" => "Zaitoun",
+          "first_name" => "Ahmad",
+          "last_name" => "Fakih",
           "email" => "zz@gmail.com",
           "longitude"=> 33.828427,
           "latitude"=>  35.568832,
@@ -79,8 +79,8 @@ class DatabaseSeeder extends Seeder
 
         DB::table("users")->insert([
 
-          "first_name" => "Zeinab",
-          "last_name" => "Zaitoun",
+          "first_name" => "Mark",
+          "last_name" => "Doe",
           "email" => "zz@handymail.com",
           "longitude"=> 33.888427,
           "latitude"=>  35.558832,
