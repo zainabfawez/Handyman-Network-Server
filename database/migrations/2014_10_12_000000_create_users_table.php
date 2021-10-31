@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
         $table->string('first_name');
         $table->string('last_name');
         $table->string('email')->unique();
-        $table->decimal('longitude', 10, 7);
-        $table->decimal('latitude', 10, 7);
+        $table->string('longitude');
+        $table->string('latitude');
         $table->timestamp('email_verified_at')->nullable();
         $table->string('password');
         $table->boolean('is_specialist'); /* 0 for client, 1 for specialist */

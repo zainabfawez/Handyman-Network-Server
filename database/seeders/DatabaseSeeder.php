@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
           
       DB::table("users")->insert([
         
-        "first_name" => "zainab",
-        "last_name" => "fawez",
+        "first_name" => "Zainab",
+        "last_name" => "Fawez",
         "email" => "zf@handyman.com",
         "longitude"=>  33.848427,
         "latitude"=>  35.518832,
@@ -174,6 +174,19 @@ class DatabaseSeeder extends Seeder
         'currency'=>"USD",
         'experience'=>8,
         'user_id'=>1,
+        'profile_path'=>"nothing",
+        
+      ]);
+
+      DB::table("specialists_profile")->insert([
+        
+        'phone' => "+96171515448",
+        'nationality'=>"lebanese" ,      
+        'profile_picture_url'=>"nothing",
+        'price'=>120000,
+        'currency'=>"LBP",
+        'experience'=>7,
+        'user_id'=>4,
         'profile_path'=>"nothing",
         
       ]);

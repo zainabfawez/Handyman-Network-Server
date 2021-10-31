@@ -214,9 +214,9 @@ class userController extends Controller
     }
     
     public function getAverageRate(Request $request){
-        $user_id = auth()->user()->id;
         $specialist_id = $request->specialist_id;
         $rating = RateSpecialist::where('specialist_id','=',$specialist_id)->avg('rate');  
+        $rating = round($rating, 2);
         if ($rating){
             return response()->json($rating,200);
         }else{
@@ -290,4 +290,29 @@ class userController extends Controller
             return response()->json($response, 200);
         }
     }
+
+    public function getSpecialistMapInfo(){
+        $mapInfo = DB::table('specialists_profile')
+            ->select('users.id', 'users.first_name', 'users.last_name', 'specialities.name AS speciality', 'users.longitude', 'users.latitude')
+            ->join('users','specialists_profile.user_id', '=','users.id')
+            ->join('specialityOfSpecialist','specialists_profile.user_id','=','specialityOfSpecialist.specialist_id' )
+            ->join('specialities', 'specialities.id', '=', 'specialityOfSpecialist.speciality_id')
+            //->join('rateSpecialists', 'specialists_profile.user_id','=','rateSpecialists.specialist_id')
+            ->get();
+        //$mapInfo['rating']= $this->getAverageRate(users.id);
+        return response()->json($mapInfo, 200);
+    }
+
+    Public Function getProjects(Request $request){
+        $specialist_id  = $request->specialist_id;
+        $projects = Project::select('id','name')->where('specialist_id','=',$specialist_id)->get();
+        if($projects){
+            return response()->json($projects, 200);
+        }else{
+            $response['status'] = "No results found";
+            return response()->json($response, 200);
+        }
+
+    }
+    //getProjectDetails function (with photos)
 }
