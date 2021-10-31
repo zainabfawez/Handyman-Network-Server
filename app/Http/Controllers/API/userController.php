@@ -227,11 +227,13 @@ class userController extends Controller
 
     public function getComments(Request $request){
         $user_id = auth()->user()->id;
-        $user = User::find($user_id);
         $specialist_id = $request->specialist_id;
-        $comments = CommentSpecialist::select('comment')->where('specialist_id','=',$specialist_id);  
-        $comments->save();
-        if(count($comments) > 0){
+        $comments = DB::table('commentSpecialists')
+                        ->select('commentSpecialists.comment', 'users.first_name', 'users.last_name')
+                        ->where("specialist_id",$specialist_id)
+                        ->join('users','commentSpecialists.client_id', '=','users.id')
+                        ->get();             
+        if($comments){
             return response()->json($comments, 200);
         }else{
             $response['status'] = "No comments found";
@@ -239,8 +241,9 @@ class userController extends Controller
         }
     }
 
+
+
     public function getTips(Request $request){
-        $user_id = auth()->user()->id;
         $tips = SpecialistTip::all();  
         if(count($tips) > 0){
             return response()->json($tips, 200);
@@ -276,7 +279,7 @@ class userController extends Controller
         if($specialists){
             return response()->json($specialists, 200);
         }else{
-            $response['status'] = "No results found";
+            $response['status'] = "No Specialists found";
             return response()->json($response, 200);
         }
     }
@@ -286,7 +289,7 @@ class userController extends Controller
         if($pushTokens){
             return response()->json($pushTokens, 200);
         }else{
-            $response['status'] = "No results found";
+            $response['status'] = "No pushToken found";
             return response()->json($response, 200);
         }
     }
@@ -297,9 +300,7 @@ class userController extends Controller
             ->join('users','specialists_profile.user_id', '=','users.id')
             ->join('specialityOfSpecialist','specialists_profile.user_id','=','specialityOfSpecialist.specialist_id' )
             ->join('specialities', 'specialities.id', '=', 'specialityOfSpecialist.speciality_id')
-            //->join('rateSpecialists', 'specialists_profile.user_id','=','rateSpecialists.specialist_id')
             ->get();
-        //$mapInfo['rating']= $this->getAverageRate(users.id);
         return response()->json($mapInfo, 200);
     }
 
@@ -309,10 +310,24 @@ class userController extends Controller
         if($projects){
             return response()->json($projects, 200);
         }else{
-            $response['status'] = "No results found";
+            $response['status'] = "No Projects found";
             return response()->json($response, 200);
         }
 
     }
-    //getProjectDetails function (with photos)
+
+    
+    Public Function getProjectDetails(Request $request){
+        $project_id  = $request->project_id;
+        $project = Project::where('id','=',$project_id)->get();
+        if($project){
+            return response()->json($project, 200);
+        }else{
+            $response['status'] = "No Projects found";
+            return response()->json($response, 200);
+        }
+
+    }
+
+    //getProjectPhotos function 
 }

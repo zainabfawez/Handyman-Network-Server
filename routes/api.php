@@ -44,8 +44,8 @@ Route::group([
     Route::get('/get-all-specialities', [userController::class, 'getAllSpecialities']); 
     Route::get('/get-specialist-specialities', [userController::class, 'getSpecialistSpeciality']); 
     Route::post('/add-project', [userController::class, 'addProject']);
-    Route::get('/get-projects', [userController::class, 'getProjects']);  
-    Route::get('/get-project-Details', [userController::class, 'getProjectDetails']);  
+    Route::get('/get-projects', [userController::class, 'getProjects']);   
+    Route::get('/get-project-details', [userController::class, 'getProjectDetails']);  
     Route::post('/add-project-photo', [userController::class, 'addProjectPhoto']);  
     Route::post('/rate-specialist', [userController::class, 'rateSpecialist']);    
     Route::post('/comment-specialist', [userController::class, 'commentSpecialist']); 
@@ -59,7 +59,4 @@ Route::group([
     Route::post('/add-profile-pic', [userController::class, 'addProfilePic']); 
     Route::get('/get-all-specialists', [userController::class, 'getAllSpecialists']);
     Route::get('/get-specialist-map-info', [userController::class, 'getSpecialistMapInfo']);
-
-
-
 });
