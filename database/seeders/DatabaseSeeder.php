@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         
         "first_name" => "Imad",
         "last_name" => "Ahmad",
-        "email" => "ia@mai;.com",
+        "email" => "ia@mail.com",
         "longitude"=> 35.518832,
         "latitude"=>  33.848427,
         "expoPushNotificationToken"=> 'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
           "last_name" => "Sweid",
           "email" => "ys@mail.com",
           "longitude"=> 35.513832,
-          "latitude"=>  33.838427,
+          "latitude"=>  33.841427,
           "expoPushNotificationToken"=>'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
           "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
           "is_specialist" => 1,
