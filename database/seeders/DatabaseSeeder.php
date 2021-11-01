@@ -17,24 +17,24 @@ class DatabaseSeeder extends Seeder
           
       DB::table("users")->insert([
         
-        "first_name" => "Zainab",
-        "last_name" => "Fawez",
-        "email" => "zf@handyman.com",
-        "longitude"=>  33.848427,
-        "latitude"=>  35.518832,
-        "expoPushNotificationToken"=> null,
+        "first_name" => "Imad",
+        "last_name" => "Ahmad",
+        "email" => "ia@mai;.com",
+        "longitude"=> 35.518832,
+        "latitude"=>  33.848427,
+        "expoPushNotificationToken"=> 'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
         "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
         "is_specialist" => 1,
         ]);
 
       DB::table("users")->insert([
 
-        "first_name" => "Hanan",
-        "last_name" => "Ch",
-        "email" => "h@mail.com",
-        "longitude"=> 33.858427,
-        "latitude"=>  35.528832,
-        "expoPushNotificationToken"=> null,
+        "first_name" => "Zahn",
+        "last_name" => "Olson",
+        "email" => "zo@mail.com",
+        "longitude"=> 35.528832,
+        "latitude"=>  33.858427,
+        "expoPushNotificationToken"=>'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
         "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
         "is_specialist" => 0,
         ]);
@@ -42,12 +42,12 @@ class DatabaseSeeder extends Seeder
                 
       DB::table("users")->insert([
 
-        "first_name" => "Zeinab",
-        "last_name" => "Zaitoun",
-        "email" => "zz@mail.com",
+        "first_name" => "Zoeller",
+        "last_name" => "Wilson",
+        "email" => "zw@mail.com",
         "longitude"=> 33.868427,
         "latitude"=>  35.538832,
-        "expoPushNotificationToken"=> null,
+        "expoPushNotificationToken"=> 'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
         "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
         "is_specialist" => 0,
         ]);
@@ -57,9 +57,9 @@ class DatabaseSeeder extends Seeder
         "first_name" => "Ali",
         "last_name" => "Zaytoun",
         "email" => "z@mail.com",
-        "longitude"=> 33.878427,
-        "latitude"=>  35.548832,
-        "expoPushNotificationToken"=> null,
+        "longitude"=> 35.538832,
+        "latitude"=> 33.868427,
+        "expoPushNotificationToken"=>  'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
         "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
         "is_specialist" => 1,
         ]);
@@ -68,10 +68,10 @@ class DatabaseSeeder extends Seeder
 
           "first_name" => "Ahmad",
           "last_name" => "Fakih",
-          "email" => "zz@gmail.com",
-          "longitude"=> 33.828427,
-          "latitude"=>  35.568832,
-          "expoPushNotificationToken"=> null,
+          "email" => "af@mail.com",
+          "longitude"=> 35.514832,
+          "latitude"=>  33.838427,
+          "expoPushNotificationToken"=> 'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
           "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
           "is_specialist" => 1,
           ]);
@@ -81,10 +81,10 @@ class DatabaseSeeder extends Seeder
 
           "first_name" => "Mark",
           "last_name" => "Doe",
-          "email" => "zz@handymail.com",
-          "longitude"=> 33.888427,
-          "latitude"=>  35.558832,
-          "expoPushNotificationToken"=> null,
+          "email" => "md@mail.com",
+          "longitude"=> 35.568832,
+          "latitude"=>  33.828427,
+          "expoPushNotificationToken"=>'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
           "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
           "is_specialist" => 1,
           ]);
@@ -94,9 +94,9 @@ class DatabaseSeeder extends Seeder
           "first_name" => "Yasser",
           "last_name" => "Sweid",
           "email" => "ys@mail.com",
-          "longitude"=> 33.898427,
-          "latitude"=>  35.598832,
-          "expoPushNotificationToken"=> null,
+          "longitude"=> 35.513832,
+          "latitude"=>  33.838427,
+          "expoPushNotificationToken"=>'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
           "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
           "is_specialist" => 1,
           ]);
