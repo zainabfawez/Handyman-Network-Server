@@ -40,7 +40,7 @@ Route::group([
     Route::get('/get-profile', [userController::class, 'getProfile']); 
     Route::post('/add-speciality', [userController::class, 'addSpeciality']); 
     Route::get('/get-user', [userController::class, 'getUser']);
-    Route::post('/search-speciality', [userController::class, 'searchBySpeciality']);   
+    Route::post('/search-speciality', [userController::class, 'search']);   
     Route::get('/get-all-specialities', [userController::class, 'getAllSpecialities']); 
     Route::get('/get-specialist-specialities', [userController::class, 'getSpecialistSpeciality']); 
     Route::post('/add-project', [userController::class, 'addProject']);

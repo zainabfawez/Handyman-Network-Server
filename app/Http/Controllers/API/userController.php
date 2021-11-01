@@ -123,26 +123,24 @@ class userController extends Controller
         }
     }
 
-    public function searchBySpeciality(Request $request){
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        $name = $request->speciality."%";
-        $speciality_id = Speciality::where('name', 'LIKE', $name)->first()->id;
-        $specialists_id = SpecialityOfSpecialist::select('specialist_id')
-                                                    ->where('speciality_id','=',$speciality_id)
-                                                    ->get();
-        $specialists = array();
-        foreach($specialists_id as $specialist_id){
-            $id = (int) $specialist_id->specialist_id;
-            $sp= User::where('id','=',$id)->get();
-            $specialists[] = $sp;
-        }             
-        if(count($specialists) > 0){
+
+    public function search(Request $request){
+        $search = $request->speciality."%";
+        $specialists = DB::table('users')
+                            ->join('specialityOfSpecialist','specialityOfSpecialist.specialist_id', '=', 'users.id')
+                            ->join('specialities', 'specialityOfSpecialist.speciality_id', '=', 'specialities.id')
+                            ->join('specialists_profile','specialists_profile.user_id', '=', 'users.id')
+                            ->where('specialities.name', 'like', $search)
+                            ->select('users.id', 'specialities.name AS speciality', 'users.longitude', 'users.latitude','users.first_name', 'users.last_name' )
+                            ->get();
+        if($specialists){
             return response()->json($specialists, 200);
         }else{
-            $response['status'] = "No results found";
+            $response['status'] = "No Search Results ";
             return response()->json($response, 200);
         }
+
+
     }
 
 
@@ -220,7 +218,7 @@ class userController extends Controller
         if ($rating){
             return response()->json($rating,200);
         }else{
-            $response['status']="no rates yet";
+            $response['status']="no rating";
             return response()->json($response,200);
         }      
     }
