@@ -61,18 +61,17 @@ class userController extends Controller
 
     }
 
-    //need to be checked
     public function addProfilePic(Request $request){
+        $user_id = auth()->user()->id;
         $image = $request->image;  // your base64 encoded
         $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
         $path=public_path();
         \File::put($path. '/image/' . $imageName, base64_decode($image));
-        $response['status'] = "add-Profile";
-        $user_id = auth()->user()->id;
-        $profile = SpecialistProfile::where('user_id', '=', $user_id);
+        $profile = SpecialistProfile::where('user_id', '=', $user_id)->first();
         $profile->profile_picture_url = '/image/'.$imageName;
         $profile->save();
-        return response()->json($user, 200);
+        $response['status'] = "add-Profile";
+        return response()->json($response, 200);
     }
 
     public function addSpeciality(Request $request){
