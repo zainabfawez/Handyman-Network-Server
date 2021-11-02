@@ -139,8 +139,6 @@ class userController extends Controller
             $response['status'] = "No Search Results ";
             return response()->json($response, 200);
         }
-
-
     }
 
 
@@ -152,7 +150,7 @@ class userController extends Controller
             $project = new Project;
             $project->name = $request->name;
             $project->description =$request->description;
-            $project->is_done = 0 ;
+            $project->is_done = $request->is_done ;
             $project->total_cost= $request->total_cost;
             $project->currency = $request->currency;
             $project->specialist_id = $user_id;
@@ -242,8 +240,11 @@ class userController extends Controller
 
 
     public function getTips(Request $request){
-        $tips = SpecialistTip::all();  
-        if(count($tips) > 0){
+        $tips =DB::table('specialists_tips')
+                    ->join('users', 'users.id', '=', 'specialists_tips.specialist_id')  
+                    ->select('users.first_name', 'users.last_name', 'specialists_tips.tip',  'specialists_tips.id')
+                    ->get();
+        if($tips){
             return response()->json($tips, 200);
         }else{
             $response['status'] = "No tips found";
@@ -311,10 +312,21 @@ class userController extends Controller
             $response['status'] = "No Projects found";
             return response()->json($response, 200);
         }
-
     }
 
     
+    Public Function getSpecialistProjects(Request $request){
+        $specialist_id  = $request->specialist_id;
+        $projects = Project::where('specialist_id','=',$specialist_id)->get();
+        if($projects){
+            return response()->json($projects, 200);
+        }else{
+            $response['status'] = "No Projects found";
+            return response()->json($response, 200);
+        }
+    }
+
+
     Public Function getProjectDetails(Request $request){
         $project_id  = $request->project_id;
         $project = Project::where('id','=',$project_id)->get();
@@ -326,6 +338,8 @@ class userController extends Controller
         }
 
     }
+
+
 
     //getProjectPhotos function 
 }

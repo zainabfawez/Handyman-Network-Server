@@ -281,6 +281,59 @@ class DatabaseSeeder extends Seeder
           "client_id" => 2,
           'rate' => 5,   
         ]);
+        
+        DB::table("specialists_tips")->insert([
+          
+          "specialist_id" => 1,
+          "tip" => "umbre is the new color to paint",
+
+        ]);
+
+        DB::table("specialists_tips")->insert([
+          
+          "specialist_id" => 4,
+          "tip" => "Pull Your Paint Color From a Print.",
+
+        ]);
+
+        DB::table("specialists_tips")->insert([
+          
+          "specialist_id" => 5,
+          "tip" => "Avoid drywall screws for woodworking.",
+
+        ]);
+
+        
+        DB::table("specialists_tips")->insert([
+          
+          "specialist_id" => 5,
+          "tip" => " Know your wood’s moisture content.",
+
+        ]);
+
+        DB::table("specialists_tips")->insert([
+          
+          "specialist_id" => 6,
+          "tip" => " Measure with a drafting square.",
+
+        ]);
+
+        DB::table("specialists_tips")->insert([
+          
+          "specialist_id" => 1,
+          "tip" => " Use the proper wattage for lamps and lighting fixtures.",
+
+        ]);
+
+        DB::table("specialists_tips")->insert([
+          
+          "specialist_id" => 7,
+          "tip" => "Keep electrical appliances and tools away from water.",
+
+        ]);
+
+
+
 
         
     
