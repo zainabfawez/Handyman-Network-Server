@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         "expoPushNotificationToken"=> 'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
         "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
         "is_specialist" => 1,
+        "added_profile" => 1,
         ]);
 
       DB::table("users")->insert([
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
         "expoPushNotificationToken"=>'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
         "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
         "is_specialist" => 0,
+        "added_profile" => 0,
         ]);
 
                 
@@ -50,6 +52,7 @@ class DatabaseSeeder extends Seeder
         "expoPushNotificationToken"=> 'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
         "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
         "is_specialist" => 0,
+        "added_profile" => 0,
         ]);
 
       DB::table("users")->insert([
@@ -62,6 +65,7 @@ class DatabaseSeeder extends Seeder
         "expoPushNotificationToken"=>  'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
         "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
         "is_specialist" => 1,
+        "added_profile" => 1,
         ]);
 
         DB::table("users")->insert([
@@ -74,6 +78,7 @@ class DatabaseSeeder extends Seeder
           "expoPushNotificationToken"=> 'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
           "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
           "is_specialist" => 1,
+          "added_profile" => 1,
           ]);
 
 
@@ -87,6 +92,7 @@ class DatabaseSeeder extends Seeder
           "expoPushNotificationToken"=>'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
           "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
           "is_specialist" => 1,
+          "added_profile" => 1,
           ]);
 
         DB::table("users")->insert([
@@ -99,6 +105,7 @@ class DatabaseSeeder extends Seeder
           "expoPushNotificationToken"=>'ExponentPushToken[E2-CS1FM2Sw7kJvrNMbrlM]',
           "password" => '$2y$10$ItUhSjSsnUBOg8WPckLQxeA3IVlz6hjAD/BoHLcimYKPVYWiXBOXG',//qweqwe
           "is_specialist" => 1,
+          "added_profile" => 1,
           ]);
 
 
@@ -174,7 +181,7 @@ class DatabaseSeeder extends Seeder
           'currency'=>"USD",
           'experience'=>8,
           'user_id'=>1,
-          'profile_path'=>"nothing",
+         
           
         ]);
 
@@ -187,8 +194,7 @@ class DatabaseSeeder extends Seeder
           'currency'=>"LBP",
           'experience'=>7,
           'user_id'=>4,
-          'profile_path'=>"nothing",
-          
+         
         ]);
 
         DB::table("specialists_profile")->insert([
@@ -200,8 +206,7 @@ class DatabaseSeeder extends Seeder
           'currency'=>"LBP",
           'experience'=>5,
           'user_id'=>5,
-          'profile_path'=>"nothing",
-          
+        
         ]);
 
         DB::table("specialists_profile")->insert([
@@ -213,7 +218,7 @@ class DatabaseSeeder extends Seeder
           'currency'=>"USD",
           'experience'=>4,
           'user_id'=>6,
-          'profile_path'=>"nothing",
+       
           
         ]);
 
@@ -226,7 +231,7 @@ class DatabaseSeeder extends Seeder
           'currency'=>"USD",
           'experience'=>2,
           'user_id'=>7,
-          'profile_path'=>"nothing",
+      
           
         ]);
 

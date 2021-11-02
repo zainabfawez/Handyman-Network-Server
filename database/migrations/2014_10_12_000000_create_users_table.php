@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
         $table->timestamp('email_verified_at')->nullable();
         $table->string('password');
         $table->boolean('is_specialist'); /* 0 for client, 1 for specialist */
+        $table->boolean('added_profile'); /*0 if the specialist hasn't adde profile for him*/
         $table->string ('expoPushNotificationToken')->nullable();
         $table->rememberToken();
         $table->timestamps();
@@ -36,7 +37,6 @@ class CreateUsersTable extends Migration
         $table->string('currency');
         $table->integer('experience');
         $table->integer('user_id');
-        $table->string('profile_path');
         $table->rememberToken();
         $table->timestamps();
     });

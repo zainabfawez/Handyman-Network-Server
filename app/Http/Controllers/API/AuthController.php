@@ -76,6 +76,7 @@ class AuthController extends Controller
             $user->latitude = $request->latitude;
             $user->expoPushNotificationToken = $request->expoPushNotificationToken;
             $user->is_specialist = $request-> is_specialist; 
+            $user->added_profile = 0; /*upon register the profile is not added */
             $user->save();
             if (! $token = auth()->attempt($validator->validated())) {
                 return response()->json(['error' => 'Unauthorized'], 401);

@@ -34,10 +34,12 @@ class userController extends Controller
             $profile->nationality =$request->nationality;
             $profile->profile_picture_url = "null" ;
             $profile->price = $request->price;
+            $profile->experience = $request->experience;
             $profile->currency = $request->currency;
             $profile->user_id = $user_id;
-            $profile->profile_path = "null";
             $profile->save();
+            $user->added_profile = 1;
+            $user->save();
             $response['status'] = "profile-added";
             return response()->json($response, 200);
         }else{
@@ -68,7 +70,7 @@ class userController extends Controller
         $response['status'] = "add-Profile";
         $user_id = auth()->user()->id;
         $profile = SpecialistProfile::where('user_id', '=', $user_id);
-        $profile->profile_path = '/image/'.$imageName;
+        $profile->profile_picture_url = '/image/'.$imageName;
         $profile->save();
         return response()->json($user, 200);
     }
@@ -212,7 +214,7 @@ class userController extends Controller
     public function getAverageRate(Request $request){
         $specialist_id = $request->specialist_id;
         $rating = RateSpecialist::where('specialist_id','=',$specialist_id)->avg('rate');  
-        $rating = round($rating, 2);
+        $rating = round($rating, 1);
         if ($rating){
             return response()->json($rating,200);
         }else{
