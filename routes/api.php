@@ -58,6 +58,7 @@ Route::group([
     Route::get('/get-all-clients', [userController::class, 'getAllClients']);
     Route::get('/get-push-tokens', [userController::class, 'getPushToken']); 
     Route::post('/add-profile-pic', [userController::class, 'addProfilePic']); 
+    Route::get('/get-profile-pic', [userController::class, 'getProfilePic']); 
     Route::get('/get-all-specialists', [userController::class, 'getAllSpecialists']);
     Route::get('/get-specialist-map-info', [userController::class, 'getSpecialistMapInfo']);
 });

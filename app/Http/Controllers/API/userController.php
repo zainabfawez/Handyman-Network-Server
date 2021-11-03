@@ -71,7 +71,16 @@ class userController extends Controller
         $profile->profile_picture_url = '/image/'.$imageName;
         $profile->save();
         $response['status'] = "add-Profile";
-        return response()->json($response, 200);
+       
+    }
+
+    public function getProfilePic(Request $request){
+        $specialist_id = $request->specialist_id;
+        $image_path = SpecialistProfile::select('profile_picture_url')
+                                        ->where('user_id',$specialist_id)
+                                        ->first();
+        return response()->json($image_path, 200);
+
     }
 
     public function addSpeciality(Request $request){
