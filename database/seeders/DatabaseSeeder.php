@@ -259,19 +259,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         
-        DB::table("commentspecialists")->insert([
+        // DB::table("commentspecialists")->insert([
           
-          "specialist_id" => 1,
-          "client_id" => 2,
-          'comment' => 'Amazing work, really experienced',   
-        ]);
+        //   "specialist_id" => 1,
+        //   "client_id" => 2,
+        //   'comment' => 'Amazing work, really experienced',   
+        // ]);
 
-        DB::table("commentspecialists")->insert([
+        // DB::table("commentspecialists")->insert([
           
-          "specialist_id" => 1,
-          "client_id" => 3,
-          'comment' => 'Always on time, deserves every penny',   
-        ]);
+        //   "specialist_id" => 1,
+        //   "client_id" => 3,
+        //   'comment' => 'Always on time, deserves every penny',   
+        // ]);
 
         DB::table("ratespecialists")->insert([
           
