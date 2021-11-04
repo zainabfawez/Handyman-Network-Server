@@ -165,7 +165,18 @@ class userController extends Controller
             $project->currency = $request->currency;
             $project->specialist_id = $user_id;
             $project->save();
-            $response['status'] = "project-added";
+            $project_id = $project->id;
+            //Add project pic
+            $image = $request->image;  // your base64 encoded
+            $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
+            $path=public_path();
+            \File::put($path. '/ProjectImages/' . $imageName, base64_decode($image));
+            $response['status'] = "add_photo";
+            $photo = new ProjectPhoto;
+            $photo->photo_url= '/ProjectImages/'.$imageName;
+            $photo->project_id = $project_id;
+            $photo->save();
+            $response['status'] = "profile added";
             return response()->json($response, 200);
         }else{
             $response['status'] = "access denied";
@@ -181,13 +192,11 @@ class userController extends Controller
         \File::put($path. '/ProjectImages/' . $imageName, base64_decode($image));
         $response['status'] = "add_photo";
         $user_id = auth()->user()->id;    
-        $user = User::find($user_id);
-        $project = Project::where('specialist_id', $user_id);
-        $project_id = $project->id;
+        $project_id = $request->project_id;
         $photo = new ProjectPhoto;
         $photo->photo_url= '/ProjectImages/'.$imageName;
         $photo->project_id = $project_id;
-        $user->save();
+        $photo->save();
         return response()->json($response, 200);
     }
 

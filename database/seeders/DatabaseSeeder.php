@@ -259,83 +259,83 @@ class DatabaseSeeder extends Seeder
         ]);
 
         
-        // DB::table("commentspecialists")->insert([
+        DB::table("commentspecialists")->insert([
           
-        //   "specialist_id" => 1,
-        //   "client_id" => 2,
-        //   'comment' => 'Amazing work, really experienced',   
-        // ]);
+          "specialist_id" => 1,
+          "client_id" => 2,
+          'comment' => 'Amazing work, really experienced',   
+        ]);
 
-        // DB::table("commentspecialists")->insert([
+        DB::table("commentspecialists")->insert([
           
-        //   "specialist_id" => 1,
-        //   "client_id" => 3,
-        //   'comment' => 'Always on time, deserves every penny',   
-        // ]);
+          "specialist_id" => 1,
+          "client_id" => 3,
+          'comment' => 'Always on time, deserves every penny',   
+        ]);
 
-        // DB::table("ratespecialists")->insert([
+        DB::table("ratespecialists")->insert([
           
-        //   "specialist_id" => 1,
-        //   "client_id" => 3,
-        //   'rate' => 4,   
-        // ]);
+          "specialist_id" => 1,
+          "client_id" => 3,
+          'rate' => 4,   
+        ]);
 
-        // DB::table("ratespecialists")->insert([
+        DB::table("ratespecialists")->insert([
           
-        //   "specialist_id" => 1,
-        //   "client_id" => 2,
-        //   'rate' => 5,   
-        // ]);
+          "specialist_id" => 1,
+          "client_id" => 2,
+          'rate' => 5,   
+        ]);
         
-        // DB::table("specialists_tips")->insert([
+        DB::table("specialists_tips")->insert([
           
-        //   "specialist_id" => 1,
-        //   "tip" => "umbre is the new color to paint",
+          "specialist_id" => 1,
+          "tip" => "umbre is the new color to paint",
 
-        // ]);
+        ]);
 
-        // DB::table("specialists_tips")->insert([
+        DB::table("specialists_tips")->insert([
           
-        //   "specialist_id" => 4,
-        //   "tip" => "Pull Your Paint Color From a Print.",
+          "specialist_id" => 4,
+          "tip" => "Pull Your Paint Color From a Print.",
 
-        // ]);
+        ]);
 
-        // DB::table("specialists_tips")->insert([
+        DB::table("specialists_tips")->insert([
           
-        //   "specialist_id" => 5,
-        //   "tip" => "Avoid drywall screws for woodworking.",
+          "specialist_id" => 5,
+          "tip" => "Avoid drywall screws for woodworking.",
 
-        // ]);
+        ]);
 
         
-        // DB::table("specialists_tips")->insert([
+        DB::table("specialists_tips")->insert([
           
-        //   "specialist_id" => 5,
-        //   "tip" => " Know your wood’s moisture content.",
+          "specialist_id" => 5,
+          "tip" => " Know your wood’s moisture content.",
 
-        // ]);
+        ]);
 
-        // DB::table("specialists_tips")->insert([
+        DB::table("specialists_tips")->insert([
           
-        //   "specialist_id" => 6,
-        //   "tip" => " Measure with a drafting square.",
+          "specialist_id" => 6,
+          "tip" => " Measure with a drafting square.",
 
-        // ]);
+        ]);
 
-        // DB::table("specialists_tips")->insert([
+        DB::table("specialists_tips")->insert([
           
-        //   "specialist_id" => 1,
-        //   "tip" => " Use the proper wattage for lamps and lighting fixtures.",
+          "specialist_id" => 1,
+          "tip" => " Use the proper wattage for lamps and lighting fixtures.",
 
-        // ]);
+        ]);
 
-        // DB::table("specialists_tips")->insert([
+        DB::table("specialists_tips")->insert([
           
-        //   "specialist_id" => 7,
-        //   "tip" => "Keep electrical appliances and tools away from water.",
+          "specialist_id" => 7,
+          "tip" => "Keep electrical appliances and tools away from water.",
 
-        // ]);
+        ]);
 
 
 
