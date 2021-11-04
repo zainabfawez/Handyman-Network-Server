@@ -61,4 +61,8 @@ Route::group([
     Route::get('/get-profile-pic', [userController::class, 'getProfilePic']); 
     Route::get('/get-all-specialists', [userController::class, 'getAllSpecialists']);
     Route::get('/get-specialist-map-info', [userController::class, 'getSpecialistMapInfo']);
+    Route::post('/set-available-date',[userController::class, 'setAvailableDate']);
+    Route::get('/get-available-dates',[userController::class, 'getAvailableDates']);
+    Route::post('/set-appointment-date',[userController::class, 'setAppointmentDate']);
+    Route::get('/get-appointment-dates',[userController::class, 'getAppointmentDates']);
 });

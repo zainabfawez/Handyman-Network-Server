@@ -16,9 +16,9 @@ use App\Models\Project;
 use App\Models\SpecialistTip;
 use App\Models\ProjectPhoto;
 use App\Models\SpecialityOfSpecialist;
+use App\Models\Appointment;
+use App\Models\Availability;
 use Symfony\Component\HttpFoundation\Response;
-
-
 use Validator;
 
 
@@ -176,7 +176,7 @@ class userController extends Controller
             $photo->photo_url= '/ProjectImages/'.$imageName;
             $photo->project_id = $project_id;
             $photo->save();
-            $response['status'] = "profile added";
+            $response = $project_id;
             return response()->json($response, 200);
         }else{
             $response['status'] = "access denied";
@@ -358,7 +358,63 @@ class userController extends Controller
 
     }
 
+    Public Function setAvailableDate(Request $request){
+        $specialist_id = auth()->user()->id;
+        $newDate = new Availability;
+        $newDate->specialist_id = $specialist_id;
+        $newDate->is_available = 1;
+        $newDate->availableDate = $request->date;
+        $newDate->save();
+        $response['status'] = "date added";
+        return response()->json($response, 200);
+    }
 
+    Public Function setAppointmentDate(Request $request){
+        $user_id = auth()->user()->id;
+        $newAppointment = new Appointment;
+        $newAppointment->specialist_id = $request->specialist_id;
+        $newAppointment->client_id = $user_id;
+        $newAppointment->appointmentDate = $request->date;
+        $checkDate = Availability::where('availableDate','=',$newAppointment->appointmentDate)
+                                    ->where('is_available', 1)
+                                    ->first();
+        $checkDate->is_available = 0;
+        $checkDate->save();
+        if ($newAppointment->appointmentDate == $checkDate->availableDate){
+            $newAppointment->save();
+            $response['status'] = "date added";
+            return response()->json($response, 200);
+        }else{
+            $response['status'] = "date not available";
+            return response()->json($response, 200);
+        }
+       
+    }
 
-    //getProjectPhotos function 
+    public function getAvailabledates(Request $request){
+        $specialist_id = $request->specialist_id;
+        $dates = Availability::select('availableDate')->where('is_available', 1)->get();
+        if($dates){
+            return response()->json($dates, 200);
+        }else{
+            $response['status'] = "No available dates";
+            return response()->json($response, 200);
+        }
+
+    }
+
+    public function getAppointmentdates(Request $request){
+        $specialist_id = auth()->user()->id;
+        $dates = DB::table('appointments As app')
+                   ->select('app.appointmentDate As date', 'users.first_name', 'users.last_name')
+                   ->join('users', 'app.client_id','=', 'users.id')
+                   ->get();
+        if ($dates){
+            return response()->json($dates, 200);
+        }else{
+            $response['status'] = "No appointments";
+            return response()->json($response, 200);
+        }           
+    }
+
 }

@@ -41,13 +41,29 @@ class CreateUsersTable extends Migration
         $table->timestamps();
     });
 
-    
-
     Schema::create('rateSpecialists', function (Blueprint $table) {
         $table->id();
         $table->tinyInteger('rate');
         $table->integer('specialist_id');    
         $table->integer('client_id');    
+        $table->rememberToken();
+        $table->timestamps();
+    });
+
+    Schema::create('availabilityDates', function (Blueprint $table) {
+        $table->id();
+        $table->integer('specialist_id');
+        $table->date('availableDate');
+        $table->boolean('is_available');   
+        $table->rememberToken();
+        $table->timestamps();
+    });
+ 
+    Schema::create('appointments', function (Blueprint $table) {
+        $table->id();
+        $table->integer('specialist_id');
+        $table->integer('client_id');
+        $table->date('appointmentDate');
         $table->rememberToken();
         $table->timestamps();
     });
