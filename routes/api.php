@@ -38,33 +38,41 @@ Route::group([
 ], function () {
     Route::post('/add-profile', [userController::class, 'addProfile']); 
     Route::get('/get-profile', [userController::class, 'getProfile']); 
-    Route::post('/add-speciality', [userController::class, 'addSpeciality']); 
     Route::get('/get-user', [userController::class, 'getUser']);
+    Route::post('/add-profile-pic', [userController::class, 'addProfilePic']); 
+    Route::get('/get-profile-pic', [userController::class, 'getProfilePic']); 
+    Route::get('/get-all-clients', [userController::class, 'getAllClients']);
+    Route::get('/get-all-specialists', [userController::class, 'getAllSpecialists']);
+    Route::post('/edit-info', [userController::class, 'editInfo']);
+
     Route::post('/search-speciality', [userController::class, 'search']);   
+    Route::post('/add-speciality', [userController::class, 'addSpeciality']); 
     Route::get('/get-all-specialities', [userController::class, 'getAllSpecialities']); 
-    Route::get('/get-specialist-specialities', [userController::class, 'getSpecialistSpeciality']); 
+    Route::get('/get-specialist-specialities', [userController::class, 'getSpecialistSpeciality']);
+
     Route::post('/add-project', [userController::class, 'addProject']);
     Route::get('/get-projects', [userController::class, 'getProjects']); 
     Route::get('/get-specialist-projects', [userController::class, 'getSpecialistProjects']); 
     Route::get('/get-project-details', [userController::class, 'getProjectDetails']);  
     Route::post('/add-project-photo', [userController::class, 'addProjectPhoto']);  
     Route::get('/get-project-photos', [userController::class, 'getProjectPhotos']); 
-    Route::post('/rate-specialist', [userController::class, 'rateSpecialist']);    
-    Route::post('/comment-specialist', [userController::class, 'commentSpecialist']); 
-    Route::post('/add-location', [userController::class, 'addLocation']);   
+
+    Route::post('/rate-specialist', [userController::class, 'rateSpecialist']);   
     Route::get('/get-average-rate', [userController::class, 'getAverageRate']);  
-    Route::get('/get-comments', [userController::class, 'getComments']); 
+
+    Route::post('/comment-specialist', [userController::class, 'commentSpecialist']); 
+    Route::get('/get-comments', [userController::class, 'getComments']);
+
     Route::post('/add-tip', [userController::class, 'addTip']); 
     Route::get('/get-tips', [userController::class, 'getTips']); 
-    Route::get('/get-all-clients', [userController::class, 'getAllClients']);
-    Route::get('/get-push-tokens', [userController::class, 'getPushToken']); 
-    Route::post('/add-profile-pic', [userController::class, 'addProfilePic']); 
-    Route::get('/get-profile-pic', [userController::class, 'getProfilePic']); 
-    Route::get('/get-all-specialists', [userController::class, 'getAllSpecialists']);
-    Route::get('/get-specialist-map-info', [userController::class, 'getSpecialistMapInfo']);
-    Route::post('/edit-info', [userController::class, 'editInfo']);
-    Route::get('/get-specific-push-token', [userController::class, 'getSpecificPushToken']);
 
+    Route::post('/add-location', [userController::class, 'addLocation']);   
+   
+    Route::get('/get-push-tokens', [userController::class, 'getPushToken']);
+    Route::get('/get-specific-push-token', [userController::class, 'getSpecificPushToken']); 
+  
+    Route::get('/get-specialist-map-info', [userController::class, 'getSpecialistMapInfo']);
+  
     Route::post('/set-available-date',[userController::class, 'setAvailableDate']);
     Route::get('/get-available-dates',[userController::class, 'getAvailableDates']);
     Route::post('/set-appointment-date',[userController::class, 'setAppointmentDate']);

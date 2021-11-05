@@ -265,8 +265,6 @@ class userController extends Controller
         }
     }
 
-
-
     public function getTips(Request $request){
         $tips =DB::table('specialists_tips As tips')
                     ->join('users', 'users.id', '=', 'tips.specialist_id')  
