@@ -268,9 +268,10 @@ class userController extends Controller
 
 
     public function getTips(Request $request){
-        $tips =DB::table('specialists_tips')
-                    ->join('users', 'users.id', '=', 'specialists_tips.specialist_id')  
-                    ->select('users.first_name', 'users.last_name', 'specialists_tips.tip',  'specialists_tips.id')
+        $tips =DB::table('specialists_tips As tips')
+                    ->join('users', 'users.id', '=', 'tips.specialist_id')  
+                    ->join('specialists_profile As profile', 'profile.user_id', '=',  'tips.specialist_id')
+                    ->select('users.first_name', 'users.last_name', 'tips.tip',  'tips.id','profile.profile_picture_url As image')
                     ->get();
         if($tips){
             return response()->json($tips, 200);
@@ -382,7 +383,8 @@ class userController extends Controller
     Public Function setAppointmentDate(Request $request){
         $user_id = auth()->user()->id;
         $newAppointment = new Appointment;
-        $newAppointment->specialist_id = $request->specialist_id;
+        $specialist_id = $request->specialist_id;
+        $newAppointment->specialist_id = $specialist_id;
         $newAppointment->client_id = $user_id;
         $newAppointment->appointmentDate = $request->date;
         $checkDate = Availability::where('availableDate','=',$newAppointment->appointmentDate)
@@ -392,8 +394,9 @@ class userController extends Controller
         $checkDate->save();
         if ($newAppointment->appointmentDate == $checkDate->availableDate){
             $newAppointment->save();
-            $response['status'] = "date added";
-            return response()->json($response, 200);
+            $specialist = User::find($specialist_id);
+            $token = $specialist->expoPushNotificationToken;
+            return response()->json($token, 200);
         }else{
             $response['status'] = "date not available";
             return response()->json($response, 200);
@@ -425,6 +428,25 @@ class userController extends Controller
             $response['status'] = "No appointments";
             return response()->json($response, 200);
         }           
+    }
+
+    public function editInfo(Request $request){
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->save();
+        $response['status'] = "values edited";
+        return response()->json($response,200);
+    }
+
+    public function getSpecificPushToken(Request $request){
+        $specialist_id = $request->specialist_id;
+        $user = User::find($specialist_id);
+        $pushToken = $user->expoPushNotificationToken;
+        return response()->json($pushToken, 200);
+
     }
 
 }
