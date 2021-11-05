@@ -32,11 +32,15 @@ class userController extends Controller
             $profile = new SpecialistProfile;
             $profile->phone = $request->phone;
             $profile->nationality =$request->nationality;
-            $profile->profile_picture_url = "null" ;
             $profile->price = $request->price;
             $profile->experience = $request->experience;
             $profile->currency = $request->currency;
             $profile->user_id = $user_id;
+            $image = $request->image;  // your base64 encoded
+            $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
+            $path=public_path();
+            \File::put($path. '/image/' . $imageName, base64_decode($image));
+            $profile->profile_picture_url = '/image/'.$imageName;
             $profile->save();
             $user->added_profile = 1;
             $user->save();
@@ -166,16 +170,6 @@ class userController extends Controller
             $project->specialist_id = $user_id;
             $project->save();
             $project_id = $project->id;
-            //Add project pic
-            $image = $request->image;  // your base64 encoded
-            $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
-            $path=public_path();
-            \File::put($path. '/ProjectImages/' . $imageName, base64_decode($image));
-            $response['status'] = "add_photo";
-            $photo = new ProjectPhoto;
-            $photo->photo_url= '/ProjectImages/'.$imageName;
-            $photo->project_id = $project_id;
-            $photo->save();
             $response = $project_id;
             return response()->json($response, 200);
         }else{
@@ -184,7 +178,6 @@ class userController extends Controller
         }
     }
     
-   // need to be checked
     public function addProjectPhoto(Request $request){
         $image = $request->image;  // your base64 encoded
         $imageName = "str_random(".rand(10,1000).")".'.'.'jpeg';
@@ -198,6 +191,22 @@ class userController extends Controller
         $photo->project_id = $project_id;
         $photo->save();
         return response()->json($response, 200);
+    }
+
+    
+    public function getProjectPhotos(Request $request){
+        $project_id = $request->project_id;
+        $image_path = ProjectPhoto::select('photo_url')
+                                        ->where('project_id',$project_id)
+                                        ->get();
+        if (count($image_path) == 0){
+            $response['status'] = "No Photos to show";
+            return response()->json($response, 200);
+        }else{
+            return response()->json($image_path, 200);
+        }
+       
+
     }
 
     public function rateSpecialist(Request $request){
@@ -232,7 +241,7 @@ class userController extends Controller
         $specialist_id = $request->specialist_id;
         $rating = RateSpecialist::where('specialist_id','=',$specialist_id)->avg('rate');  
         $rating = round($rating, 1);
-        if ($rating){
+        if ($rating != 0){
             return response()->json($rating,200);
         }else{
             $response['status']="no rating";
@@ -325,11 +334,12 @@ class userController extends Controller
     Public Function getProjects(Request $request){
         $specialist_id  = $request->specialist_id;
         $projects = Project::select('id','name')->where('specialist_id','=',$specialist_id)->get();
-        if($projects){
-            return response()->json($projects, 200);
-        }else{
+        if(count($projects) == 0){
             $response['status'] = "No Projects found";
             return response()->json($response, 200);
+        }else{
+            return response()->json($projects, 200);
+           
         }
     }
 

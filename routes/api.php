@@ -48,6 +48,7 @@ Route::group([
     Route::get('/get-specialist-projects', [userController::class, 'getSpecialistProjects']); 
     Route::get('/get-project-details', [userController::class, 'getProjectDetails']);  
     Route::post('/add-project-photo', [userController::class, 'addProjectPhoto']);  
+    Route::get('/get-project-photos', [userController::class, 'getProjectPhotos']); 
     Route::post('/rate-specialist', [userController::class, 'rateSpecialist']);    
     Route::post('/comment-specialist', [userController::class, 'commentSpecialist']); 
     Route::post('/add-location', [userController::class, 'addLocation']);   
@@ -61,6 +62,8 @@ Route::group([
     Route::get('/get-profile-pic', [userController::class, 'getProfilePic']); 
     Route::get('/get-all-specialists', [userController::class, 'getAllSpecialists']);
     Route::get('/get-specialist-map-info', [userController::class, 'getSpecialistMapInfo']);
+
+    
     Route::post('/set-available-date',[userController::class, 'setAvailableDate']);
     Route::get('/get-available-dates',[userController::class, 'getAvailableDates']);
     Route::post('/set-appointment-date',[userController::class, 'setAppointmentDate']);
