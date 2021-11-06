@@ -176,7 +176,7 @@ class DatabaseSeeder extends Seeder
           
           'phone' => "+96171336789",
           'nationality'=>"lebanese" ,      
-          'profile_picture_url'=>"nothing",
+          'profile_picture_url'=>"/image/str_random(102).jpeg",
           'price'=>10,
           'currency'=>"USD",
           'experience'=>8,
@@ -189,7 +189,7 @@ class DatabaseSeeder extends Seeder
           
           'phone' => "+96171234586",
           'nationality'=>"lebanese" ,      
-          'profile_picture_url'=>"nothing",
+          'profile_picture_url'=>"/image/str_random(292).jpeg",
           'price'=>120000,
           'currency'=>"LBP",
           'experience'=>7,
@@ -201,7 +201,7 @@ class DatabaseSeeder extends Seeder
           
           'phone' => "+96171234586",
           'nationality'=>"Lebanese" ,      
-          'profile_picture_url'=>"nothing",
+          'profile_picture_url'=>"/image/str_random(899).jpeg",
           'price'=>150000,
           'currency'=>"LBP",
           'experience'=>5,
@@ -213,7 +213,7 @@ class DatabaseSeeder extends Seeder
           
           'phone' => "+96171234986",
           'nationality'=>"Syrian" ,      
-          'profile_picture_url'=>"nothing",
+          'profile_picture_url'=>"/image/str_random(716).jpeg",
           'price'=>15,
           'currency'=>"USD",
           'experience'=>4,
@@ -226,7 +226,7 @@ class DatabaseSeeder extends Seeder
           
           'phone' => "+96171234989",
           'nationality'=>"Palestanian" ,      
-          'profile_picture_url'=>"nothing",
+          'profile_picture_url'=>"/image/str_random(102).jpeg",
           'price'=>8,
           'currency'=>"USD",
           'experience'=>2,
