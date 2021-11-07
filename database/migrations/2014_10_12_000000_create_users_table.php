@@ -93,8 +93,6 @@ class CreateUsersTable extends Migration
         $table->timestamps();
         $table->softDeletes();
     });
-
-
     
     Schema::create('projects', function (Blueprint $table) {
         $table->id();
